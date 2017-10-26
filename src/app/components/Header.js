@@ -23,10 +23,10 @@ export default class Header extends React.PureComponent {
         )}
         actions={(
           <span>
-            <Link href="/"><Button flat>Home</Button></Link>
-            <Link href="/about"><Button flat>About</Button></Link>
-            <Link href="/search"><Button flat>Search</Button></Link>
-            <Link href="/bar"><Button flat>Bar</Button></Link>
+            <Link prefetch href="/"><Button flat>Home</Button></Link>
+            <Link prefetch href="/about"><Button flat>About</Button></Link>
+            <Link prefetch href="/search"><Button flat>Search</Button></Link>
+            <Link prefetch href="/bar"><Button flat>Bar</Button></Link>
           </span>
         )}
       />

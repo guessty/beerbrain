@@ -13,12 +13,12 @@ Router.onRouteChangeStart = (url) => {
     const $parentNode = $container.parentNode
     const $clone = $container.cloneNode(true)
 
-    document.body.classList.add('loading')
+    // document.body.classList.add('loading')
     $clone.classList.add('clone')
 
     $clone.addEventListener('animationend', () => {
       console.log('animation ended')
-      document.body.classList.remove('loading')
+      // document.body.classList.remove('loading')
       $parentNode.querySelector('.clone').remove()
       $parentNode.querySelector('#container').classList.remove('animate-in')
     }, { once: true })
@@ -27,8 +27,6 @@ Router.onRouteChangeStart = (url) => {
       const $container2 = document.getElementById('container')
       $parentNode.insertBefore($clone, $parentNode.childNodes[0])
       $clone.classList.add('animate-out')
-      // const $appMain = $container2.querySelector('.app').querySelector('.app__main')
-      // while ($appMain.firstChild) $appMain.removeChild($appMain.firstChild)
       $container2.classList.add('animate-in')
     })
   }
@@ -43,27 +41,18 @@ class App extends Component {
   render () {
     const { children } = this.props
     return (
-      <main  id="container">
+      <main id="container">
         <style global jsx>
           {`
-            .app {
-              width: 100%;
+            main {
               min-height: 100vh;
               background-color: white;
-            }
-
-            .app__main {
               padding: 16px;
             }
           `}
         </style>
-        <div className="app">
-          <Header />
-          <div className="app__main">
-            {children}
-          </div>
-        </div>
-        <OrderDialog />
+        <Header />
+        {children}
       </main>
     )
   }

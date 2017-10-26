@@ -13,7 +13,7 @@ export default class MyDocument extends Document {
       <html>
         <Head>
           <meta name="viewport" content="width=device-width, initial-scale=1" />
-          <link rel='stylesheet' href='/static/react-md.light_blue-yellow.min.css' />
+          <link rel='stylesheet' href='/static/react-md.light_blue-amber.min.css' />
           <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500' />
           <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Material+Icons' />
           <link rel='stylesheet' href='/static/style.css' />
