@@ -4,34 +4,50 @@ import raf from 'raf'
 import Router from 'next/router'
 
 import Header from "./Header"
-import OrderDialog from "./OrderDialog"
 
+const urlDepth = (url) => url.split('/').filter((item) => item !== "").length
 
 Router.onRouteChangeStart = (url) => {
-  if (Router.router.route !== url) {
+  if (!Router.previousUrl) Router.previousUrl = Router.router.asPath
+  if (Router.previousUrl !== url) {
     const $container = document.getElementById('container')
     const $parentNode = $container.parentNode
     const $clone = $container.cloneNode(true)
-
-    document.body.classList.add('loading')
-    $clone.classList.add('clone')
-
+    $clone.classList.remove("_original")
+    $clone.classList.add('_clone')
+    $parentNode.insertBefore($clone, $container.nextSibling)
+    // document.body.classList.add('loading')
+  }
+}
+Router.onRouteChangeComplete = (url) => {
+  if (Router.previousUrl !== url) {
+    const $container = document.querySelector('._original')
+    const $parentNode = $container.parentNode
+    const $clone = $parentNode.querySelector('._clone')
+    const direction = (urlDepth(url) >= urlDepth(Router.previousUrl)) ? 'in' : 'out'
+    
     $clone.addEventListener('animationend', () => {
-      console.log('animation ended')
-      document.body.classList.remove('loading')
-      $parentNode.querySelector('.clone').remove()
-      $parentNode.querySelector('#container').classList.remove('animate-in')
+      // document.body.classList.remove('loading')
+      $clone.remove()
+      $container.classList.remove('animate-in')
+      $container.classList.remove('animate-out')
+      $container.classList.remove('animate-static')
+      Router.previousUrl = url
     }, { once: true })
 
     raf(() => {
-      const $container2 = document.getElementById('container')
-      $parentNode.insertBefore($clone, $parentNode.childNodes[0])
-      $clone.classList.add('animate-out')
-      // const $appMain = $container2.querySelector('.app').querySelector('.app__main')
-      // while ($appMain.firstChild) $appMain.removeChild($appMain.firstChild)
-      $container2.classList.add('animate-in')
+      if (direction === 'in') {
+        $clone.classList.add('animate-static')
+        $container.classList.add('animate-in')
+      } else {
+        $clone.classList.add('animate-out')
+        $container.classList.add('animate-static')
+      }
     })
   }
+}
+Router.onRouteChangeError = () => {
+  console.log('error')
 }
 
 
@@ -43,27 +59,14 @@ class App extends Component {
   render () {
     const { children } = this.props
     return (
-      <main  id="container">
-        <style global jsx>
-          {`
-            .app {
-              width: 100%;
-              min-height: 100vh;
-              background-color: white;
-            }
-
-            .app__main {
-              padding: 16px;
-            }
-          `}
-        </style>
+      <main id="container" className="_original">
         <div className="app">
           <Header />
           <div className="app__main">
             {children}
           </div>
         </div>
-        <OrderDialog />
+        <div className="app__fixed-elements" />
       </main>
     )
   }

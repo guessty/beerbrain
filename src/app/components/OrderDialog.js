@@ -5,7 +5,7 @@ import {
   Toolbar,
 } from 'react-md'
 
-export default class OOrderDialog extends PureComponent {
+export default class OrderDialog extends PureComponent {
   state = { visible: false, pageX: null, pageY: null }
   show = (e) => {
     // provide a pageX/pageY to the dialog when making visible to make the
