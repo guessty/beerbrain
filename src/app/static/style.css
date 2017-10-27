@@ -1,7 +1,7 @@
 body, html {
 	margin: 0 auto;
 	padding: 0;
-	max-width: 768px;
+	max-width: 500px;
 	position: relative;
 	overflow: hidden;
 	height: 100vh;
@@ -53,7 +53,7 @@ body, html {
 
 #container[class*="animate-"] .app {
 	position: absolute;
-	animation: animateIn 0.75s ease-in-out forwards;
+	animation: animateIn 0.3s cubic-bezier(0, 0, 0.2, 1) forwards;
 	transform-origin: center;
 	will-change: transform;
 	z-index: 1;
@@ -77,14 +77,24 @@ body, html {
 .app {
 	width: 100%;
 	min-height: 100vh;
+	max-height: 100vh;
 	background-color: white;
 }
 
 .app__main {
 	padding: 16px;
+	max-height: calc(100vh - 64px);
+	overflow-y: auto;
 }
 
-.loading #container:not(._clone) h1 {
-	opacity: 0;
-	animation: fadeIn 1s .15s ease-in-out forwards;
+.app--no-header header {
+	display: none;
+}
+
+.app--no-header .app__main {
+	max-height: 100vh;
+}
+
+.loading .md-progress {
+	display: block !important;
 }

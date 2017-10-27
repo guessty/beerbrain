@@ -33,7 +33,8 @@ export default class OrderDialog extends PureComponent {
           fixedPosition="br"
           style={{ position: 'absolute' }}
           onClick={this.show}
-          aria-controls="simple-full-page-dialog">
+          aria-controls="simple-full-page-dialog"
+        >
           local_drink
         </Button>
         <DialogContainer

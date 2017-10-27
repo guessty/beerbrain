@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Head from 'next/head'
 import raf from 'raf'
 import Router from 'next/router'
+import { CircularProgress } from 'react-md'
 
 import Header from "./Header"
 
@@ -16,7 +17,8 @@ Router.onRouteChangeStart = (url) => {
     $clone.classList.remove("_original")
     $clone.classList.add('_clone')
     $parentNode.insertBefore($clone, $container.nextSibling)
-    // document.body.classList.add('loading')
+    $clone.querySelector('.app__main').scrollTop = $container.querySelector('.app__main').scrollTop
+    document.body.classList.add('loading')
   }
 }
 Router.onRouteChangeComplete = (url) => {
@@ -25,9 +27,9 @@ Router.onRouteChangeComplete = (url) => {
     const $parentNode = $container.parentNode
     const $clone = $parentNode.querySelector('._clone')
     const direction = (urlDepth(url) >= urlDepth(Router.previousUrl)) ? 'in' : 'out'
-    
+    document.body.classList.remove('loading')
+
     $clone.addEventListener('animationend', () => {
-      // document.body.classList.remove('loading')
       $clone.remove()
       $container.classList.remove('animate-in')
       $container.classList.remove('animate-out')
@@ -50,26 +52,18 @@ Router.onRouteChangeError = () => {
   console.log('error')
 }
 
-
-class App extends Component {
-  constructor (props) {
-    super(props)
-  }
-
-  render () {
-    const { children } = this.props
-    return (
-      <main id="container" className="_original">
-        <div className="app">
-          <Header />
-          <div className="app__main">
-            {children}
-          </div>
-        </div>
-        <div className="app__fixed-elements" />
-      </main>
-    )
-  }
-}
-
-export default App
+export default ({ children, noHeader, title, nav, actions, search, back }) => (
+  <main id="container" className="_original">
+    <CircularProgress
+      style={{ display: 'none', position: 'absolute', left: 'calc(50% - 24px)', top: 'calc(50% - 24px)', margin: '0' }}
+      scale={2}
+    />
+    <div className={(noHeader) ? 'app app--no-header' : 'app'}>
+      <Header title={title} nav={nav} actions={actions} search={search} back={back} />
+      <div className="app__main">
+        {children}
+      </div>
+    </div>
+    <div className="app__fixed-elements" />
+  </main>
+)

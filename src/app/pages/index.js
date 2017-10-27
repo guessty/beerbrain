@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react'
 import {
-  Button, TextField,
-  Autocomplete, SelectionControlGroup,
+  Button, TextField, FontIcon,
+  IconSeparator, Avatar,
 } from 'react-md'
 import Router from 'next/router'
+import { Link } from '../routes'
 
 import App from '../components/App'
 
@@ -19,22 +20,27 @@ class Index extends PureComponent {
   }
   render () {
     return (
-      <App>
-        <div>
-          <p className="f1">Hello from the Home Page</p>
-          <TextField
-            id="searchText"
-            lineDirection="center"
-            placeholder="Search for a Bar"
-            className="md-cell md-cell--bottom"
-            ref={text => this._text = text}
-          />
-          <Button
-            raised primary iconChildren="search"
-            onClick={this.handleSearch}
-          >
-            Search
-          </Button>
+      <App
+        title={(
+          <IconSeparator label="Beer2.me" iconBefore component="span">
+            <Avatar suffix="light_blue" icon={<FontIcon>local_drink</FontIcon>} />
+          </IconSeparator>
+        )}
+        search
+        noHeader
+      >
+        <div className="md-text-center">
+          <FontIcon className="md-display-3">local_drink</FontIcon>
+          <h1 className="md-display-3">BeerBrain.io</h1>
+          <h2 className="md-display-1">The easy way to remember your order</h2>
+          <Link route="/search">
+            <Button
+              raised primary iconChildren="search"
+              style={{ fontSize: '1.3rem', height: '52px' }}
+            >
+              Find a bar or pub
+            </Button>
+          </Link>
         </div>
       </App>
     )
