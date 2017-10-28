@@ -3,11 +3,13 @@ import {
 } from 'react-md'
 
 import App from '../components/App'
+import OrderDialog from "../components/OrderDialog"
 
 
 export default () => (
   <App back>
     <div>
+      <p>My Order</p>
       <List>
         <Subheader primaryText="Available Drinks" primary />
         <ListItem

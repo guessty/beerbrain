@@ -19,6 +19,7 @@ export default class MyDocument extends Document {
           <link rel='stylesheet' href='/static/style.css' />
         </Head>
         <body>
+          <div className="phone-emulator"><div className="phone-emulator__phone"/></div>
           {this.props.customValue}
           <Main />
           <NextScript />

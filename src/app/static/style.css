@@ -1,7 +1,7 @@
 body, html {
 	margin: 0 auto;
 	padding: 0;
-	max-width: 500px;
+	max-width: 420px;
 	position: relative;
 	overflow: hidden;
 	height: 100vh;
@@ -9,7 +9,7 @@ body, html {
 
 @keyframes animateIn {
 	from {
-		transform: translate3d(100%, 0, 0);;
+		transform: translate3d(100%, 0, 0);
 	}
 
 	to {
@@ -17,13 +17,46 @@ body, html {
 	}
 }
 
-/*@keyframes animateOut {
+@keyframes animateOut {
 	to {
 		transform: translate3d(-100%, 0, 0);
 	}
-}*/
+}
 
-@keyframes animateOut {
+@keyframes animateInFromLeft {
+	from {
+		transform: translate3d(100%, 0, 0);
+	}
+
+	to {
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes animateInFromRight {
+	from {
+		transform: translate3d(-100%, 0, 0);
+	}
+
+	to {
+		transform: translate3d(0, 0, 0);
+	}
+}
+
+@keyframes animateOutFromLeft {
+	to {
+		transform: translate3d(-100%, 0, 0);
+	}
+}
+
+@keyframes animateOutFromRight {
+	to {
+		transform: translate3d(100%, 0, 0);
+	}
+}
+
+
+/*@keyframes animateOut {
 	from {
 		transform: translate3d(0, 0, 0);;
 	}
@@ -31,7 +64,7 @@ body, html {
 	to {
 		transform: translate3d(100%, 0, 0);
 	}
-}
+}*/
 
 @keyframes animateStatic {
 	to {
@@ -64,6 +97,26 @@ body, html {
 	display: block;
 }
 
+#container.animate-in-left .app {
+	animation-name: animateInFromLeft;
+	display: block;
+}
+
+#container.animate-in-right .app {
+	animation-name: animateInFromRight;
+	display: block;
+}
+
+#container.animate-out-left .app {
+	animation-name: animateOutFromLeft;
+	display: block;
+}
+
+#container.animate-out-right .app {
+	animation-name: animateOutFromRight;
+	display: block;
+}
+
 #container.animate-static .app {
 	animation-name: animateStatic;
 	display: block;
@@ -76,13 +129,12 @@ body, html {
 
 .app {
 	width: 100%;
-	min-height: 100vh;
-	max-height: 100vh;
+	height: calc(100vh - 56px);
 	background-color: white;
 }
 
 .app__main {
-	max-height: calc(100vh - 64px);
+	max-height: calc(100% - 64px);
 	overflow-y: auto;
 }
 
@@ -96,4 +148,35 @@ body, html {
 
 .loading .md-progress {
 	display: block !important;
+}
+
+@media ( min-width: 500px ) {
+	body {
+		margin: 60px auto;
+		margin-bottom: 100px;
+    height: calc(100% - 160px);
+	}
+
+	.phone-emulator {
+		margin: 0 auto;
+		padding: 0;
+		width: 420px;
+		height: calc(100vh - 20px);
+		position: fixed;
+		z-index: -1;
+		top: 10px;
+	}
+
+	.phone-emulator__phone {
+		background-color: #484848;
+    position: absolute;
+    height: 100%;
+    left: -10px;
+    right: -10px;
+    border-radius: 10px;
+	}
+
+	.app {
+		height: calc(100vh - 56px - 160px);
+	}
 }

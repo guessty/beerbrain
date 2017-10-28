@@ -24,22 +24,6 @@ export default withRouter(({ title, nav, actions, back, search, router }) => (
         {nav}
       </div>
     }
-    actions={(
-      <div>
-        {
-          (search) ? (
-            <Link href="/search">
-              <Button
-                key="nav"
-                icon
-              >
-                search
-              </Button>
-            </Link>
-          ) : null
-        }
-        {actions}
-      </div>
-    )}
+    actions={actions}
   />
 ))
