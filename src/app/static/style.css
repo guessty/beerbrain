@@ -134,7 +134,7 @@ body, html {
 }
 
 .app__main {
-	max-height: calc(100% - 64px);
+	max-height: calc(100% - 56px);
 	overflow-y: auto;
 }
 
@@ -150,10 +150,18 @@ body, html {
 	display: block !important;
 }
 
+.md-toolbar {
+	height: 56px;
+}
+
+.md-btn--toolbar {
+	margin-bottom: 4px !important;
+	margin-top: 4px !important;
+}
+
 @media ( min-width: 500px ) {
 	body {
-		margin: 60px auto;
-		margin-bottom: 100px;
+		margin: 50px auto 110px !important;
     height: calc(100% - 160px);
 	}
 
@@ -168,12 +176,23 @@ body, html {
 	}
 
 	.phone-emulator__phone {
-		background-color: #484848;
+		background-color: #2f2f2f;
     position: absolute;
     height: 100%;
     left: -10px;
     right: -10px;
     border-radius: 10px;
+	}
+
+	.phone-emulator__phone:after {
+		content: "";
+		position: absolute;
+		width: 60px;
+		height: 60px;
+		bottom: 20px;
+		left: 190px;
+		background-color: black;
+		border-radius: 100%;
 	}
 
 	.app {

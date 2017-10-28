@@ -24,13 +24,24 @@ const mainRoutes = [
 
 const urlDepth = (url) => url.split('/').filter((item) => item !== "").length
 
+const urlRoot = (url) => `/${url.split('/').filter((item) => item !== "")[0]}`
+
 const urlDirection = (from, to) => {
-  const fromObject = mainRoutes.filter(route => route.path === from)[0]
-  const toObject = mainRoutes.filter(route => route.path === to)[0]
-  console.log(fromObject, toObject)
+  let fromObject = mainRoutes.filter(route => route.path === from)[0]
+  let toObject = mainRoutes.filter(route => route.path === to)[0]
+  if (!fromObject) {
+    fromObject = mainRoutes.filter(route => route.path === urlRoot(from))[0]
+  }
+  if (!toObject) {
+    toObject = mainRoutes.filter(route => route.path === urlRoot(to))[0]
+  }
+
   const fromIndex = mainRoutes.indexOf(fromObject)
   const toIndex = mainRoutes.indexOf(toObject)
-  console.log(fromIndex, toIndex)
+
+  if (fromIndex === toIndex) {
+    return (urlDepth(to) >= urlDepth(from)) ? 'left' : 'right'
+  }
 
   return (fromIndex > toIndex) ? 'right' : 'left'
 }

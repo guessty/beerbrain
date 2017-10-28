@@ -70,7 +70,7 @@ export default class Search extends React.PureComponent {
             <Subheader primaryText="Browse Pubs and Bars in your area" primary />
             {
               Bars().map((bar) => (
-                <Link route="/search/bar" key={bar.id}>
+                <Link route="bar" key={bar.id} params={{ slug: 'another-blog-post' }}>
                   <ListItem
                     leftAvatar={<Avatar random>B</Avatar>}
                     primaryText={bar.name}
