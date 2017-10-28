@@ -9,7 +9,6 @@ import OrderDialog from "../components/OrderDialog"
 export default () => (
   <App back>
     <div>
-      <p className="f1">Hello from the Bar Page</p>
       <List>
         <Subheader primaryText="Available Drinks" primary />
         <ListItem

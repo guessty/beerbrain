@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import {
   Button, TextField, FontIcon,
-  IconSeparator, Avatar,
+  IconSeparator, Avatar, Grid,
 } from 'react-md'
 import Router from 'next/router'
 import { Link } from '../routes'
@@ -12,7 +12,6 @@ import App from '../components/App'
 
 class Index extends PureComponent {
   handleSearch = () => {
-    console.log(this._text.value)
     Router.push({
       pathname: '/search',
       query: { text: this._text.value }
@@ -29,19 +28,21 @@ class Index extends PureComponent {
         search
         noHeader
       >
-        <div className="md-text-center">
-          <FontIcon className="md-display-3">local_drink</FontIcon>
-          <h1 className="md-display-3">BeerBrain.io</h1>
-          <h2 className="md-display-1">The easy way to remember your order</h2>
-          <Link route="/search">
-            <Button
-              raised primary iconChildren="search"
-              style={{ fontSize: '1.3rem', height: '52px' }}
-            >
-              Find a bar or pub
-            </Button>
-          </Link>
-        </div>
+        <Grid style={{ padding: '16px' }}>
+          <div className=" md-text-center">
+            <FontIcon className="md-display-3" style={{ fontSize: '4rem' }}>local_drink</FontIcon>
+            <h1 className="md-display-3">BeerBrain.io</h1>
+            <h2 className="md-display-1">The easy way to remember your order</h2>
+            <Link route="/search">
+              <Button
+                raised primary iconChildren="search"
+                style={{ fontSize: '1.3rem', height: '52px', marginTop: '1rem' }}
+              >
+                Find a bar or pub
+              </Button>
+            </Link>
+          </div>
+        </Grid>
       </App>
     )
   }
