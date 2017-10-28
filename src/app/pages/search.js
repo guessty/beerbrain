@@ -53,15 +53,17 @@ export default class Search extends React.PureComponent {
             </Button>
           </Link>
         )}
-        actions={(
-          <Button
-            key="nav"
-            icon
-            onClick={this.handleClearSearch}
-          >
-            close
-          </Button>
-        )}
+        actions={
+          (value) ? (
+            <Button
+              key="nav"
+              icon
+              onClick={this.handleClearSearch}
+            >
+              close
+            </Button>
+          ) : null
+        }
       >
         <div>
           <List>
