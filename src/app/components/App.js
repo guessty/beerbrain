@@ -55,6 +55,7 @@ Router.onRouteChangeError = () => {
 export default ({ children, noHeader, title, nav, actions, search, back }) => (
   <main id="container" className="_original">
     <CircularProgress
+      id="general-loading"
       style={{ display: 'none', position: 'absolute', left: 'calc(50% - 24px)', top: 'calc(50% - 24px)', margin: '0' }}
       scale={2}
     />
