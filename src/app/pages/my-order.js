@@ -1,36 +1,31 @@
 import {
   Button, Avatar, List, ListItem, Subheader,
 } from 'react-md'
-
+import withRedux from 'next-redux-wrapper'
+import { initStore } from '../store'
 import App from '../components/App'
-import OrderDialog from "../components/OrderDialog"
 
+const mapStateToProps = (state) => {
+  return {
+    order: state.order
+  }
+}
 
-export default () => (
+export default withRedux(initStore, mapStateToProps)(({ order }) => (
   <App
     title="My Order"
   >
     <List>
-      <Subheader primaryText="My Order" primary />
-      <ListItem
-        disabled
-        leftAvatar={<Avatar suffix="deep-purple">B</Avatar>}
-        rightAvatar={<Button floating mini className="md-paper md-paper--0">add</Button>}
-        primaryText="Brunch this weekend?"
-        secondaryText={'Ali Connors\nI\'ll be in your neighborhood sometime this week'}
-      />
-      <ListItem
-        leftAvatar={<Avatar suffix="green">Q</Avatar>}
-        rightAvatar={<Button floating mini className="md-paper md-paper--0">add</Button>}
-        primaryText="Summer BBQ"
-        secondaryText={'to Alex, Scott, Jennifer\nWish I could come, but I\'m out of town this weekend.'}
-      />
-      <ListItem
-        leftAvatar={<Avatar suffix="orange">A</Avatar>}
-        rightAvatar={<Button floating mini className="md-paper md-paper--0">add</Button>}
-        primaryText="Oui Oui"
-        secondaryText="Sandra Adams - Do you have Paris recommendations? Have you ever been?"
-      />
+      {
+        order.items.map((product) => (
+          <ListItem
+            key={product.id}
+            leftAvatar={<Avatar random>P</Avatar>}
+            primaryText={product.name}
+            secondaryText={`£${product.price.toFixed(2)}`}
+          />
+        ))
+      }
     </List>
   </App>
-)
+))

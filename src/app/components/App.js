@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import Head from 'next/head'
 import { CircularProgress, FontIcon } from 'react-md'
-
 import { Link } from '../routes'
 import Header from "./Header"
 import FooterNavigation from './FooterNavigation'

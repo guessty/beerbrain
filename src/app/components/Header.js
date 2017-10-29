@@ -1,29 +1,11 @@
 import React from 'react'
-import { Button, Toolbar } from 'react-md'
-import { withRouter } from 'next/router'
+import { Toolbar } from 'react-md'
 
-import { Link } from '../routes'
-
-export default withRouter(({ title, nav, actions, back, search, router }) => (
+export default ({ title, nav, actions }) => (
   <Toolbar
     colored
     title={title}
-    nav={
-      <div>
-        {
-          (back) ? (
-            <Button
-              key="nav"
-              icon
-              onClick={() => router.back()}
-            >
-              arrow_back
-            </Button>
-          ) : null
-        }
-        {nav}
-      </div>
-    }
+    nav={nav}
     actions={actions}
   />
-))
+)

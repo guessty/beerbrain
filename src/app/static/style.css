@@ -144,6 +144,8 @@ body, html {
 
 .app--no-header .app__main {
 	padding-top: 64px;
+	max-height: 100%;
+	height: 100%;
 }
 
 .loading .md-progress {
@@ -154,9 +156,18 @@ body, html {
 	height: 56px;
 }
 
+.md-title--toolbar {
+	line-height: 56px;
+}
+
 .md-btn--toolbar {
 	margin-bottom: 4px !important;
 	margin-top: 4px !important;
+	margin-top: 4px !importan
+}
+
+.md-toolbar--action-left {
+	margin-left: 4px !important;
 }
 
 @media ( min-width: 500px ) {

@@ -1,8 +1,10 @@
-import { FontIcon, injectInk } from 'react-md'
+import { FontIcon } from 'react-md'
 import Router, { withRouter } from 'next/router'
+import withRedux from 'next-redux-wrapper'
+import { Badge } from 'react-md'
 import raf from 'raf'
-import { Link } from '../routes'
-
+import { initStore } from '../store'
+import InkLink from './InkLink'
 
 const mainRoutes = [
   {
@@ -17,7 +19,7 @@ const mainRoutes = [
   },
   {
     label: 'My Order',
-    icon: 'list',
+    icon: 'local_drink',
     path: '/my-order'
   }
 ]
@@ -59,6 +61,7 @@ Router.onRouteChangeStart = (url) => {
     document.body.classList.add('loading')
   }
 }
+
 Router.onRouteChangeComplete = (url) => {
   if (Router.previousUrl !== url) {
     const $container = document.querySelector('._original')
@@ -82,48 +85,29 @@ Router.onRouteChangeComplete = (url) => {
     }, { once: true })
 
     raf(() => {
-      // if (direction === 'in') {
-      //   $clone.classList.add('animate-static')
-      //   $container.classList.add('animate-in')
-      // } else {
-      //   $clone.classList.add('animate-out')
-      //   $container.classList.add('animate-static')
-      // }
       if (mainDirection === 'left') {
         $clone.classList.add('animate-out-left')
         $container.classList.add('animate-in-left')
-      } else if (mainDirection === 'right') {
+      } else {
         $clone.classList.add('animate-out-right')
         $container.classList.add('animate-in-right')
-      } else {
-        $clone.classList.add('animate-out')
-        $container.classList.add('animate-in')
       }
     })
   }
 }
+
 Router.onRouteChangeError = () => {
   console.log('error')
 }
 
-const InkLink = injectInk(({ ink, route, active, children, ...props }) => {
-  return (
-    <Link route={route} {...props}>
-      <a
-        className={`
-          md-fake-btn md-pointer--hover md-fake-btn--no-outline md-bottom-nav md-bottom-nav--fixed
-          ${active(route) ? 'md-text--theme-primary' : ''}
-        `}
-      >
-        {ink}
-        {children}
-      </a>
-    </Link>
-  )
-})
+const mapStateToProps = (state) => {
+  return {
+    order: state.order,
+    barDetails: state.barDetails
+  }
+}
 
-
-export default withRouter(class FooterNav extends React.Component {
+export default withRedux(initStore, mapStateToProps, null)(withRouter(class FooterNav extends React.Component {
   state = { path: '' }
   componentDidMount() {
     this.updatePath(this.props.router.asPath)
@@ -140,7 +124,7 @@ export default withRouter(class FooterNav extends React.Component {
     return (route === '/search' ? this.state.path.indexOf(route) > -1 : this.state.path === route)
   }
   render() {
-    const { children, noHeader, title, nav, actions, search, back, router } = this.props
+    const { children, noHeader, title, nav, actions, order, barDetails } = this.props
     const { path } = this.state
     return (
       <footer role="navigation" className="md-paper md-paper--1 md-bottom-navigation md-background--card">
@@ -151,15 +135,21 @@ export default withRouter(class FooterNav extends React.Component {
           }
         `}
       </style>
-        {
-          mainRoutes.map((route) => (
-            <InkLink route={route.path} active={path => this.active(path)} key={route.path}>
-              <FontIcon>{route.icon}</FontIcon>
-              <div className="md-bottom-nav-label">{route.label}</div>
-            </InkLink>
-          ))
-        }
+        <InkLink route="/" active={path => this.active(path)}>
+          <FontIcon>home</FontIcon>
+          <div className="md-bottom-nav-label">Home</div>
+        </InkLink>
+        <InkLink route={barDetails.id ? `/search/${barDetails.id}` : '/search'} active={path => this.active(path)}>
+          <FontIcon>search</FontIcon>
+          <div className="md-bottom-nav-label">Search</div>
+        </InkLink>
+        <InkLink route="/my-order" active={path => this.active(path)}>
+          <Badge badgeContent={order.items.length} invisibleOnZero secondary badgeId="order-count">
+            <FontIcon>local_drink</FontIcon>
+            <div className="md-bottom-nav-label">My Order</div>
+          </Badge>
+        </InkLink>
       </footer>
     )
   }
-})
+}))
