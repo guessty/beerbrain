@@ -13,12 +13,6 @@ class Search extends React.PureComponent {
     store.dispatch(getAllBars());
     return {};
   }
-  handleClearSearch() {
-    this.props.setSearchText('');
-  }
-  handleChange(value) {
-    this.props.setSearchText(value);
-  }
   filterdBars() {
     const { bars, searchText } = this.props;
     const options = {
@@ -47,7 +41,7 @@ class Search extends React.PureComponent {
             fullWidth
             value={searchText}
             placeholder="Search Bars and Pubs"
-            onChange={this.handleChange}
+            onChange={value => this.props.setSearchText(value)}
             toolbar
             autoFocus
           />
@@ -57,7 +51,7 @@ class Search extends React.PureComponent {
             <Button
               key="nav"
               icon
-              onClick={this.handleClearSearch}
+              onClick={() => this.props.setSearchText('')}
             >
               close
             </Button>
