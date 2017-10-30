@@ -60,6 +60,7 @@ class MyOrder extends React.PureComponent {
                 }
                 primaryText={product.name}
                 secondaryText={`£${product.price.toFixed(2)}`}
+                tileStyle={{ background: 'inherit !important' }}
               />
             ))
           }
