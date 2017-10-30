@@ -43,7 +43,6 @@ class Search extends React.PureComponent {
             placeholder="Search Bars and Pubs"
             onChange={value => this.props.setSearchText(value)}
             toolbar
-            autoFocus
           />
         )}
         actions={
