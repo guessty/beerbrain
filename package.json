@@ -2,7 +2,7 @@
   "name": "beerbrain",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/knowmorecode/beerme.git",
+  "repository": "https://github.com/knowmorecode/beerbrain.git",
   "author": "knowmorecode <christguest@hotmail.com>",
   "license": "MIT",
   "scripts": {
