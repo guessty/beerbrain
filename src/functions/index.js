@@ -13,47 +13,47 @@ exports.next = functions.https.onRequest((req, res) => {
   return app.prepare().then(() => handle(req, res))
 })
 
-exports.api = functions.https.onRequest((req, res) => {
-  cors(req, res, () => {
-    res.send({ 'drinks': 'test from cors' })
-  })
-})
-
-exports.graphQL = functions.https.onRequest((req, res) => {
-  cors(req, res, () => {
-    const data = {
-      query: `query GetAllDrinks {
-        viewer {
-          allDrinks {
-            edges {
-              node {
-                id
-                name
-                price
-              }
-            }
-          }
-        }
-      }`
-    }
-
-    request({
-      url: "https://us-west-2.api.scaphold.io/graphql/determined-birthday",
-      method: "POST",
-      json: true,
-      headers: {
-        "content-type": "application/json",
-      },
-      body: data
-    }, (error, response, body) => {
-      console.log(error, response)
-      if (!error && response.statusCode == 200) {
-        console.log(JSON.stringify(body, null, 2))
-        res.status(200).send(response)
-      } else {
-        console.log(error)
-        res.status(500).send({ message: error.message })
-      }
-    })
-  })
-})
+// exports.api = functions.https.onRequest((req, res) => {
+//   cors(req, res, () => {
+//     res.send({ 'drinks': 'test from cors' })
+//   })
+// })
+//
+// exports.graphQL = functions.https.onRequest((req, res) => {
+//   cors(req, res, () => {
+//     const data = {
+//       query: `query GetAllDrinks {
+//         viewer {
+//           allDrinks {
+//             edges {
+//               node {
+//                 id
+//                 name
+//                 price
+//               }
+//             }
+//           }
+//         }
+//       }`
+//     }
+//
+//     request({
+//       url: "https://us-west-2.api.scaphold.io/graphql/determined-birthday",
+//       method: "POST",
+//       json: true,
+//       headers: {
+//         "content-type": "application/json",
+//       },
+//       body: data
+//     }, (error, response, body) => {
+//       console.log(error, response)
+//       if (!error && response.statusCode == 200) {
+//         console.log(JSON.stringify(body, null, 2))
+//         res.status(200).send(response)
+//       } else {
+//         console.log(error)
+//         res.status(500).send({ message: error.message })
+//       }
+//     })
+//   })
+// })
