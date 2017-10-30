@@ -1,43 +1,34 @@
-import {
-  Button, TextField, FontIcon,
-  IconSeparator, Avatar, Grid,
-} from 'react-md'
-import withRedux from 'next-redux-wrapper'
-import { initStore } from '../store'
-import { Link } from '../routes'
-import App from '../components/App'
+import React from 'react';
+import { Button, FontIcon, Grid } from 'react-md';
+import withRedux from 'next-redux-wrapper';
+import { initStore } from '../store';
+import { Link } from '../routes';
+import App from '../components/App';
 
-export default withRedux(initStore)(() => (
+const Index = () => (
   <App
-    title={(
-      <IconSeparator label="Beer2.me" iconBefore component="span">
-        <Avatar suffix="light_blue" icon={<FontIcon>local_drink</FontIcon>} />
-      </IconSeparator>
-    )}
-    search
     noHeader
+    mainClassName="md-background--primary"
   >
-    <style jsx>
-      {`
-        .app__main {
-          background-color: blue;
-        }
-      `}
-    </style>
     <Grid style={{ padding: '16px' }}>
       <div className=" md-text-center">
-        <FontIcon className="md-display-3" style={{ fontSize: '4rem' }}>local_drink</FontIcon>
-        <h1 className="md-display-3">BeerBrain.io</h1>
-        <h2 className="md-display-1">The easy way to remember your order</h2>
-        <Link route="/search">
+        <h1 className="md-display-3 md-background--primary">BeerBrain.io</h1>
+        <FontIcon className="md-display-3" style={{ fontSize: '7rem', color: 'white' }}>local_drink</FontIcon>
+        <h2 className="md-display-1 md-background--primary">Take drink orders the easy way.</h2>
+        <Link route="/search" href="/search">
           <Button
-            raised primary iconChildren="search"
+            raised
+            secondary
+            iconChildren="fast_forward"
+            iconBefore={false}
             style={{ fontSize: '1.3rem', height: '52px', marginTop: '1rem' }}
           >
-            Find a bar or pub
+            Start Your Order
           </Button>
         </Link>
       </div>
     </Grid>
   </App>
-))
+);
+
+export default withRedux(initStore)(Index);
