@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
+// import { composeWithDevTools } from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 import { getAllBarsApi, getBarDetailsApi } from './api';
 
@@ -95,8 +95,7 @@ export const removeItemFromOrder = index => dispatch => (
 );
 
 export const initStore = (initialState = defaultState) => {
-  let middleware = applyMiddleware(thunkMiddleware);
-  console.log(process.NODE_ENV)
-  if (process.NODE_ENV !== 'production') middleware = composeWithDevTools(middleware)
-  return createStore(reducer, initialState, middleware)
+  const middleware = applyMiddleware(thunkMiddleware);
+  // if (process.NODE_ENV !== 'production') middleware = composeWithDevTools(middleware)
+  return createStore(reducer, initialState, middleware);
 };

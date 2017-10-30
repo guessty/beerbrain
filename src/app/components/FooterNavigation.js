@@ -111,13 +111,6 @@ class FooterNavigation extends React.Component {
     const { order, barDetails } = this.props;
     return (
       <footer role="navigation" className="md-paper md-paper--1 md-bottom-navigation md-background--card">
-        <style jsx>
-          {`
-            .md-bottom-navigation {
-              position: absolute;
-            }
-          `}
-        </style>
         <InkLink route="/" active={route => this.active(route)}>
           <FontIcon>home</FontIcon>
           <div className="md-bottom-nav-label">Home</div>

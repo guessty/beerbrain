@@ -20,12 +20,12 @@
     "react-md": "^1.2.4",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "styled-jsx": "^2.1.2"
   },
   "scripts": {
-    "dev": "node server.js",
-    "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "dev": "next",
+    "build": "next build"
   },
   "devDependencies": {
     "eslint": "^4.10.0",

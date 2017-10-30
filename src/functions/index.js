@@ -3,10 +3,12 @@ const next = require('next')
 const fetch = require('isomorphic-fetch')
 const request = require('request')
 const cors = require('cors')({origin: '*'})
+const routes = require('./routes')
+const express = require('express')
 
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev, conf: { distDir: 'next' } })
-const handle = app.getRequestHandler()
+const handle = routes.getRequestHandler(app)
 
 exports.next = functions.https.onRequest((req, res) => {
   console.log('File: ' + req.originalUrl) // log the page.js file that is being requested

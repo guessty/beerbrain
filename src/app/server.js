@@ -6,6 +6,7 @@ const app = next({ dev: process.env.NODE_ENV !== 'production' });
 const handler = routes.getRequestHandler(app);
 
 app.prepare().then(() => {
-  console.log('listening on port: ', 3000);
-  express().use(handler).listen(3000);
+  express().use(handler).listen(3000, () => {
+    console.log('listening on port: ', 3000);
+  });
 });

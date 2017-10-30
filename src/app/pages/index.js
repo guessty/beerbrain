@@ -12,7 +12,7 @@ const Index = () => (
   >
     <Grid style={{ padding: '16px' }}>
       <div className=" md-text-center">
-        <h1 className="md-display-3 md-background--primary">BeerBrain.io</h1>
+        <h1 className="md-display-3 md-background--primary">BeerBrain</h1>
         <FontIcon className="md-display-3" style={{ fontSize: '7rem', color: 'white' }}>local_drink</FontIcon>
         <h2 className="md-display-1 md-background--primary">Take drink orders the easy way.</h2>
         <Link route="/search" href="/search">
