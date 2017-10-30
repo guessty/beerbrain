@@ -94,6 +94,9 @@ export const removeItemFromOrder = index => dispatch => (
   dispatch({ type: actionTypes.REMOVE_ITEM_FROM_ORDER, index })
 );
 
-export const initStore = (initialState = defaultState) => (
-  createStore(reducer, initialState, composeWithDevTools(applyMiddleware(thunkMiddleware)))
-);
+export const initStore = (initialState = defaultState) => {
+  let middleware = applyMiddleware(thunkMiddleware);
+  console.log(process.NODE_ENV)
+  if (process.NODE_ENV !== 'production') middleware = composeWithDevTools(middleware)
+  return createStore(reducer, initialState, middleware)
+};

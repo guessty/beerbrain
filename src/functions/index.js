@@ -21,7 +21,6 @@ exports.api = functions.https.onRequest((req, res) => {
 
 exports.graphQL = functions.https.onRequest((req, res) => {
   cors(req, res, () => {
-    //res.send({ 'drinks': 'test from cors' })
     const data = {
       query: `query GetAllDrinks {
         viewer {
@@ -56,20 +55,5 @@ exports.graphQL = functions.https.onRequest((req, res) => {
         res.status(500).send({ message: error.message })
       }
     })
-
-    // fetch('https://us-west-2.api.scaphold.io/graphql/determined-birthday', {
-    //   method: "POST",
-    //   json: true,
-    //   headers: {
-    //     'content-type': 'application/json'
-    //   },
-    //   body: JSON.stringify(data)
-    // })
-    // .then((response) => {
-    //   res.status(200).send(response)
-    // })
-    // .catch((err) => {
-    //   res.status(500).send({ message: err.message })
-    // })
   })
 })

@@ -1,5 +1,5 @@
 module.exports = {
-  distPath: '../functions/next',
+  distDir: "../functions/next",
   webpack(config) {
     if (config.resolve.alias) {
       delete config.resolve.alias.react;
